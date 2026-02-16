@@ -1,0 +1,2475 @@
+:root {
+  --j1-blue: #003a70;
+  --j1-blue-dark: #002953;
+  --j1-bg: #f5f7fb;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--j1-bg);
+  color: #111827;
+}
+
+/* Header */
+
+.header {
+  background: var(--j1-blue);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+}
+
+.header-inner {
+  max-width: 1500px; /* widened further */
+  margin: 0 auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.brand-logo {
+  height: 56px;
+  width: auto;
+  max-width: 220px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.logo-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.tagline-main {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.tagline-sub {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* Main shell + tabs */
+
+.main-shell {
+  max-width: 1500px; /* widened further */
+  margin: 1.5rem auto 1.5rem;
+  padding: 0 1.5rem;
+}
+
+.tab-bar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border-radius: 999px;
+  background: #e5edf6;
+  padding: 3px;
+  margin-bottom: 0.75rem;
+}
+
+.tab-button {
+  border: none;
+  background: transparent;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #374151;
+}
+
+.tab-button--active {
+  background: #ffffff;
+  color: var(--j1-blue);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel--active {
+  display: block;
+}
+
+/* HOME PAGE */
+
+.home-layout {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.home-copy h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.home-copy p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.home-note {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* two big cards side by side */
+.home-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.home-card {
+  background: #ffffff;
+  border-radius: 0.9rem;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.home-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+}
+
+.home-card-image-wrap {
+  width: 100%;
+  padding-top: 60%;
+  position: relative;
+  background: #f3f4f6;
+}
+
+.home-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-card-body {
+  padding: 0.8rem 1rem 1rem;
+}
+
+.home-card-body h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.home-card-body p {
+  margin: 0 0 0.6rem;
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.home-card-btn {
+  border-radius: 999px;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: var(--j1-blue);
+  color: #fff;
+}
+
+.home-card-btn:hover {
+  background: var(--j1-blue-dark);
+}
+
+/* ---- Product family tiles ---- */
+
+.brand-range-section {
+  margin-top: 0.5rem;
+}
+
+.brand-range-header h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.3rem;
+}
+
+.brand-range-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.brand-range-grid {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.brand-range-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.15rem 1.4rem 1.2rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.16);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  align-items: center;
+  text-align: center;
+}
+
+/* subtle gradient background per range */
+.brand-range-card--predator {
+  background: radial-gradient(circle at top left, #ffe5b0, #f3c97a);
+}
+.brand-range-card--coloursafe {
+  background: radial-gradient(circle at top left, #d6f0cf, #a9d8a0);
+}
+.brand-range-card--watersafe {
+  background: radial-gradient(circle at top left, #d5f0ff, #a3d0f5);
+}
+.brand-range-card--touchsafe {
+  background: radial-gradient(circle at top left, #dfe9ff, #b6ccf3);
+}
+
+/* hand icon */
+.brand-range-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(246, 109, 46, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.4rem;
+  position: relative;
+}
+
+.brand-range-icon::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f66d2e' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 13V5.5a1.5 1.5 0 0 1 3 0V11'/%3E%3Cpath d='M11 11V4.5a1.5 1.5 0 0 1 3 0V11'/%3E%3Cpath d='M14 11V5.5a1.5 1.5 0 0 1 3 0V12a6 6 0 0 1-6 6h-1a5 5 0 0 1-5-5v-2.5a1.5 1.5 0 0 1 3 0V13'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.brand-range-card h3 {
+  margin: 0.1rem 0 0.45rem;
+  font-size: 1.05rem;
+  color: #1f2933;
+}
+
+.brand-range-card p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: #1f2933;
+  max-width: 36rem;
+}
+
+/* Shared layout for selector/industry/poster */
+
+.layout {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+/* Filters */
+
+.filters {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem 1.25rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.filters-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.filters-title-row h2 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #374151;
+}
+
+.filters-clear-link {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--j1-blue);
+  cursor: pointer;
+}
+
+.filters-clear-link:hover {
+  text-decoration: underline;
+}
+
+.filter-section {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+.filter-section:first-of-type {
+  border-top: none;
+  padding-top: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+.filter-section-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.filter-section-toggle {
+  font-size: 1rem;
+  color: #9ca3af;
+  transition: transform 0.15s ease;
+}
+
+.filter-section-body {
+  overflow: hidden;
+  max-height: 800px;
+  transition: max-height 0.2s ease;
+}
+
+.filter-section.collapsed .filter-section-body {
+  max-height: 0;
+}
+
+.filter-section.collapsed .filter-section-toggle {
+  transform: rotate(90deg);
+}
+
+.filter-group {
+  margin-bottom: 0.5rem;
+}
+
+.filter-group h3 {
+  margin: 0 0 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+}
+
+/* chip-style filters */
+.filter-options--chips .filter-option {
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 0.2rem 0.65rem;
+  background: #f9fafb;
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.filter-options--chips .filter-option input[type="checkbox"] {
+  appearance: none;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.filter-options--chips .filter-option span {
+  white-space: nowrap;
+}
+
+.filter-option--active {
+  background: #e5edf6;
+  border-color: var(--j1-blue);
+  color: var(--j1-blue);
+  box-shadow: 0 0 0 1px rgba(0, 58, 112, 0.25);
+}
+
+.filter-subtitle {
+  margin: 0.4rem 0 0.15rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #6b7280;
+}
+
+.filter-help {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.filter-help code {
+  background: #f3f4f6;
+  padding: 0 0.2rem;
+  border-radius: 0.2rem;
+}
+
+/* Generic buttons */
+
+.clear-btn {
+  margin-top: 0.25rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #e5edf6;
+  color: var(--j1-blue);
+  font-weight: 500;
+}
+
+.clear-btn:hover {
+  background: #d4e1f2;
+}
+
+/* Results */
+
+.results {
+  min-width: 0;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.results-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+#results-count,
+#results-count-industry {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.glove-card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 0.8rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-height: 320px;
+}
+
+.glove-card::before {
+  content: "";
+  display: block;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--j1-blue);
+  margin: -0.8rem -0.8rem 0.5rem;
+}
+
+.glove-image-wrapper {
+  width: 100%;
+  padding-top: 70%;
+  position: relative;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.glove-image-wrapper img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* magnifying glass overlay - vector icon */
+.magnify-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(0,0,0,0.55);
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.magnify-btn:hover {
+  background: rgba(0,0,0,0.75);
+}
+
+.magnify-btn::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='16' y1='16' x2='21' y2='21'/%3E%3C/svg%3E");
+}
+
+.glove-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.glove-code {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--j1-blue);
+}
+
+.glove-name {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.glove-specs {
+  font-size: 0.8rem;
+  color: #374151;
+  line-height: 1.3;
+}
+
+.glove-specs span {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+/* actions at bottom of card */
+.glove-actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.datasheet-btn {
+  margin-top: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--j1-blue);
+  color: #ffffff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.datasheet-btn:hover {
+  background: var(--j1-blue-dark);
+}
+
+/* Poster add button */
+
+.poster-btn {
+  margin-top: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 0.45rem 0.9rem; /* match Download poster pill height */
+  font-size: 0.85rem;      /* match Download poster */
+  font-weight: 500;
+  background: #fff;
+  cursor: pointer;
+}
+
+.poster-btn:hover {
+  background: #f3f4f6;
+}
+
+/* --- Filter lists: make every filter look like Requirements (vertical + scrollable) --- */
+
+/* Apply to both Features + Industry filter panels */
+.filters .filter-options {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+}
+
+/* Each filter block becomes scrollable so it doesn't dominate the page */
+.filters .filter-section-body .filter-options {
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 4px; /* space from scrollbar */
+}
+
+/* Ensure each checkbox row is a full-width line (prevents multi-column wrapping) */
+.filters .filter-options .checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  white-space: normal;
+}
+
+/* If any legacy chip markup is present, stack it vertically too */
+.filters .filter-options--chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.poster-btn--active {
+  border-color: var(--j1-blue);
+  background: #e5edf6;
+  color: var(--j1-blue);
+}
+
+.poster-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Poster section */
+
+.poster-section {
+  margin-top: 0.75rem;
+}
+
+.poster-inner {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem 1.25rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.poster-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.poster-header h2 {
+  margin: 0;
+}
+
+.poster-header p {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.poster-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.poster-count-label {
+  font-size: 0.85rem;
+}
+
+.upload-label {
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.upload-label input[type="file"] {
+  font-size: 0.75rem;
+}
+
+.primary-btn {
+  border-radius: 999px;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: var(--j1-blue);
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.primary-btn:hover {
+  background: var(--j1-blue-dark);
+}
+
+.clear-btn-small {
+  margin-top: 0;
+  padding-inline: 0.75rem;
+}
+
+/* =========================================================
+   POSTER CREATOR - TOOLBAR & STATIC PREVIEW
+   ========================================================= */
+
+/* Toolbar Buttons */
+.poster-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.poster-tool-btn {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.poster-tool-btn:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  transform: translateY(-1px);
+}
+
+.poster-tool-btn:active {
+  transform: translateY(0);
+}
+
+/* Static A4 Shell */
+.poster-a4-wrapper {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: center;
+}
+
+.poster-a4 {
+  background: #ffffff;
+  /* 
+     A4 Landscape aspect ratio = 297mm / 210mm = 1.414. 
+     We set a max-width, and let aspect-ratio drive the height.
+  */
+  width: 100%;
+  max-width: 1200px;
+  aspect-ratio: 297 / 210;
+  
+  border: 1px solid #d1d5db;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.poster-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--j1-blue);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.poster-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.poster-j1-logo {
+  height: 40px;
+  width: auto;
+}
+
+.poster-title-block h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.poster-title-block p {
+  margin: 0.15rem 0 0;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.poster-customer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  max-width: 220px;
+}
+
+#customer-logo {
+  max-height: 42px;
+  max-width: 220px;
+  object-fit: contain;
+}
+
+/* Grid that grows inside the fixed shell */
+.poster-grid {
+  flex: 1;
+  display: grid;
+  gap: 12px;
+  padding-top: 4px;
+  box-sizing: border-box;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  /* Ensure it fills available space */
+  align-content: stretch;
+  /* FIX: Allow grid to shrink so it respects the A4 container height */
+  min-height: 0;
+}
+
+/* Dynamic layouts */
+.poster-grid.layout-1 { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+.poster-grid.layout-2 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+.poster-grid.layout-3 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr; }
+.poster-grid.layout-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.poster-grid.layout-5, .poster-grid.layout-6 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.poster-grid.layout-7, .poster-grid.layout-8 { grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; }
+.poster-grid.layout-9, .poster-grid.layout-10 { grid-template-columns: repeat(5, 1fr); grid-template-rows: 1fr 1fr; gap: 8px; }
+
+/* Font scaling for dense grids */
+.poster-grid.layout-9 .poster-item-caption,
+.poster-grid.layout-10 .poster-item-caption { font-size: 0.75rem; }
+.poster-grid.layout-9 .poster-item-code,
+.poster-grid.layout-10 .poster-item-code { font-size: 0.85rem; }
+
+/* POSTER ITEM STYLING (MATCHES EXPORT) */
+.poster-item {
+  border: 1px solid #e6e9ef;
+  border-radius: 12px;
+  padding: 12px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* Fix cut-off issues */
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.poster-item-caption {
+  background: #0b3b67;
+  color: #ffffff;
+  width: 100%;
+  padding: 10px 12px;
+  margin: -12px -12px 6px -12px; /* Pull to edges */
+  width: calc(100% + 24px); /* Fix width due to negative margin */
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  border-radius: 11px 11px 0 0;
+  box-sizing: border-box;
+}
+
+.poster-item-code {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+.poster-item-name {
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: #ffffff;
+  text-align: right;
+  opacity: 0.95;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.poster-item-image {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  margin: 4px 0;
+}
+
+.poster-item-image img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.poster-item-meta {
+  width: 100%;
+  background: rgba(2, 132, 199, 0.10);
+  border-top: 1px solid rgba(2, 132, 199, 0.18);
+  border-radius: 0 0 11px 11px;
+  padding: 8px 10px;
+  margin: 6px -12px -12px -12px;
+  width: calc(100% + 24px);
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-sizing: border-box;
+}
+
+.poster-meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  line-height: 1.2;
+}
+
+.poster-meta-key {
+  font-weight: 800;
+  min-width: 48px;
+  color: #0f172a;
+}
+
+.poster-meta-val {
+  color: #334155;
+  flex: 1;
+}
+
+.poster-price-inline {
+  margin-left: auto;
+  font-weight: 800;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+.poster-meta-row--cut {
+  align-items: center;
+}
+
+/* Footer boxes */
+.poster-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.poster-company-box, .poster-notes {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px;
+  min-height: 104px;
+}
+
+.poster-footer-title {
+  font-size: 10px;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.poster-company-box-lines {
+  display:flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 9px;
+  color:#0f172a;
+}
+.poster-company-name { font-weight: 900; }
+
+.poster-notes-box {
+  font-size: 9px;
+  color:#0f172a;
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 58px;
+}
+
+/* Print Hint */
+.poster-print-hint {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+
+/* =========================================================
+   MODALS
+   ========================================================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.modal-dialog {
+  position: relative;
+  background: #fff;
+  border-radius: 0.75rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+.modal-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.modal-close-icon {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0 0.5rem;
+}
+
+.modal-body {
+  padding: 1.25rem;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid #e5e7eb;
+  text-align: right;
+  background: #f9fafb;
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+/* Modal Form Styling */
+.modal-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.poster-form-input {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.6rem;
+  font-size: 0.95rem;
+  background: #fff;
+}
+.poster-form-input:focus {
+  outline: 2px solid var(--j1-blue);
+  border-color: var(--j1-blue);
+}
+
+.poster-form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.modal-subtitle {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Prices Modal list */
+.poster-price-inputs-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.poster-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 0.5rem;
+}
+.poster-price-row:last-child {
+  border-bottom: none;
+}
+.poster-price-label {
+  font-weight: 600;
+  color: #1f2933;
+  font-size: 0.9rem;
+}
+.poster-price-input {
+  width: 90px;
+  border: 1px solid #d1d5db;
+  border-radius: 0.4rem;
+  padding: 0.3rem 0.5rem;
+}
+.poster-price-empty {
+  color: #6b7280;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+}
+
+
+/* CONTACT SECTION */
+
+.contact-section {
+  margin-top: 0.75rem;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.contact-header h2 {
+  margin: 0 0 0.25rem;
+}
+
+.contact-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* Wider boxes, still responsive */
+.contact-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); /* min width bumped */
+  gap: 1.25rem;
+}
+
+.contact-card {
+  background: #f9fafb;
+  border-radius: 0.75rem;
+  padding: 1.1rem 1.1rem 1.35rem; /* slightly more padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.contact-avatar {
+  width: 110px;   /* larger avatar */
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.55rem;
+}
+
+.contact-card h3 {
+  margin: 0.15rem 0 0;
+  font-size: 0.98rem;
+}
+
+.contact-title {
+  margin: 0.12rem 0 0.2rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--j1-blue);
+}
+
+.contact-details {
+  margin: 0.2rem 0 0;
+  font-size: 0.86rem;
+  color: #374151;
+  line-height: 1.4;
+}
+
+/* Stack email & phone cleanly and give them breathing room */
+.contact-details a {
+  color: var(--j1-blue);
+  text-decoration: none;
+  display: block;
+}
+
+.contact-details a + a {
+  margin-top: 0.18rem;
+}
+
+.contact-details a:hover {
+  text-decoration: underline;
+}
+
+.territory-map-block {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.territory-map-block h3 {
+  margin: 0 0 0.25rem;
+}
+
+.territory-map-block p {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.territory-map-link {
+  display: inline-block;
+}
+
+.territory-map-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+/* Lightbox */
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.image-lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+}
+
+.image-lightbox.active {
+  display: flex;
+}
+
+/* Footer */
+
+.footer {
+  text-align: center;
+  padding: 0 1.5rem 1.5rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .home-layout {
+    flex-direction: column;
+  }
+
+  .home-options {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-range-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    position: static;
+    max-height: none;
+  }
+
+  .brand {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .brand-logo {
+    height: 48px;
+  }
+
+  .poster-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .poster-controls {
+    justify-content: flex-start;
+  }
+
+  .poster-a4 {
+    max-width: 100%;
+  }
+}
+
+/* Print – force single A4 landscape page with poster only */
+
+@media print {
+  @page { size: A3 landscape; margin: 0; }
+
+  html, body {
+    width: 420mm;
+    height: 297mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide everything except the poster canvas */
+  body * { visibility: hidden !important; }
+
+  .poster-a4-wrapper,
+  .poster-a4-wrapper * {
+    visibility: visible !important;
+  }
+
+  /* Pin poster to top-left of the page */
+  .poster-a4-wrapper {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 420mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  /* Exact page-sized poster */
+  #poster-a4,
+  .poster-a4 {
+    width: 420mm !important;
+    height: 297mm !important;
+    max-width: none !important;
+    aspect-ratio: auto !important;
+    margin: 0 !important;
+        /* keep a small safe padding so nothing clips */
+    padding: 8mm 10mm !important;
+    overflow: hidden !important;
+  }
+
+  /* Ensure the grid fills the remaining space and always stays inside */
+  .poster-grid {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: grid !important;
+    /* DYNAMIC LAYOUTS FOR PRINT (Match screen classes) */
+    align-content: stretch !important;
+  }
+  .poster-grid.layout-1 { grid-template-columns: 1fr !important; grid-template-rows: 1fr !important; }
+  .poster-grid.layout-2 { grid-template-columns: 1fr 1fr !important; grid-template-rows: 1fr !important; }
+  .poster-grid.layout-3 { grid-template-columns: 1fr 1fr 1fr !important; grid-template-rows: 1fr !important; }
+  .poster-grid.layout-4 { grid-template-columns: 1fr 1fr !important; grid-template-rows: 1fr 1fr !important; }
+  .poster-grid.layout-5,
+  .poster-grid.layout-6 { grid-template-columns: 1fr 1fr 1fr !important; grid-template-rows: 1fr 1fr !important; }
+  .poster-grid.layout-7,
+  .poster-grid.layout-8 { grid-template-columns: repeat(4, 1fr) !important; grid-template-rows: 1fr 1fr !important; }
+  .poster-grid.layout-9,
+  .poster-grid.layout-10 { grid-template-columns: repeat(5, 1fr) !important; grid-template-rows: 1fr 1fr !important; gap: 8mm !important; }
+
+
+  /* Make tiles behave nicely in fixed-size print */
+  .poster-item {
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .poster-item-image {
+    /* Auto-flex height based on available space - but keep reasonable max */
+    flex: 1 1 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+
+  .poster-item-image img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+
+  /* Remove UI-only bits inside poster tiles */
+  .poster-remove-btn { display: none !important; }
+}
+
+/* ------------------------------------------------------------
+   Poster (PRINT) – A3 Landscape tweaks requested
+   - Blue banner behind product code & name
+   - Larger meta text (Sizes/Brand/Coating/Cut)
+   - Remove extra gap between Coating and Cut
+   - Slightly larger images (without breaking 1-page constraint)
+   ------------------------------------------------------------ */
+
+@media print {
+  /* Blue banner header inside each product tile */
+  #poster-a4 .poster-item { overflow: hidden; }
+  #poster-a4 .poster-item-caption {
+    background: #0b3b67 !important;
+    color: #fff !important;
+    padding: 4mm !important;
+    margin: 0 !important;
+    border-radius: 8px 8px 0 0 !important;
+    width: auto !important; /* Reset layout tweaks for print */
+  }
+  #poster-a4 .poster-item-code,
+  #poster-a4 .poster-item-name {
+    color: #fff !important;
+    font-weight: 700 !important;
+  }
+
+  /* Bigger glove image (still fits on one page) */
+  #poster-a4 .poster-item-image {
+    /* Height is handled by flex/grid dynamic sizing mostly, but ensure margins */
+    margin: 1mm 0 2mm !important;
+  }
+
+  /* Bigger meta text */
+  #poster-a4 .poster-item-meta { font-size: 10pt !important; line-height: 1.25 !important; }
+  #poster-a4 .poster-meta-key { font-size: 10pt !important; }
+  #poster-a4 .poster-meta-val { font-size: 10pt !important; }
+  #poster-a4 .poster-price-inline { font-size: 10pt !important; }
+
+  /* Remove the unwanted gap between Coating and Cut */
+  #poster-a4 .poster-meta-row { margin: 0 !important; }
+  #poster-a4 .poster-meta-row--cut { margin-top: 0 !important; }
+
+  /* Ensure City + Postcode newline renders properly */
+  #poster-a4 [id^="poster-company-box-line-"] { white-space: pre-line; }
+}
+
+/* --- Features tab: make Collapse/Expand/Clear controls look like pill buttons --- */
+#filters-features .filters-title-row {
+  gap: 10px;
+}
+
+#filters-features .filters-title-row .filters-clear-link {
+  padding: 0.38rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: var(--j1-blue);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.10);
+}
+
+#filters-features .filters-title-row .filters-clear-link:hover {
+  background: #e8f0f7;
+  border-color: #94a3b8;
+  text-decoration: none;
+}
+
+#filters-features .filters-title-row .filters-clear-link:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 0 rgba(15, 23, 42, 0.0);
+}
+
+#filters-features .filters-title-row .filters-clear-link:focus-visible {
+  outline: 2px solid rgba(0, 58, 112, 0.45);
+  outline-offset: 2px;
+}
+
+/* --- Layout tweak: place Expand/Collapse + Clear side-by-side under 'Filter' --- */
+#filters-features .filters-title-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 6px;
+}
+
+#filters-features .filters-title-row h2 {
+  margin-bottom: 2px;
+}
+
+#filters-features .filters-title-row .filters-actions {
+  display: flex;
+  gap: 8px;
+}
+
+#filters-features .filters-title-row .filters-clear-link {
+  margin-left: 0; /* override previous inline spacing */
+}
+
+
+/* A4 landscape */
+#tab-poster .poster-a4-wrapper{ width: 1123px; max-width: 100%; margin: 0 auto; }
+@media print{ @page { size: A4 landscape; margin: 8mm; } }
+
+/* Poster footer */
+#tab-poster .poster-footer{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+#tab-poster .poster-company-box, #tab-poster .poster-notes{ background: rgba(255,255,255,0.9); border: 1px solid #e5e7eb; border-radius: 12px; padding: 10px; }
+
+/* Poster footer height tweak (keep Tel/Web visible) */
+#tab-poster .poster-company-box,
+#tab-poster .poster-notes{
+  min-height: 104px;
+}
+#tab-poster .poster-notes-box{
+  min-height: 72px;
+}
+
+#tab-poster .poster-footer-title{ font-size: 10px; font-weight: 900; color: #0f172a; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
+#tab-poster .poster-company-box-lines{ display:flex; flex-direction: column; gap: 3px; font-size: 9px; color:#0f172a; }
+#tab-poster .poster-company-name{ font-weight: 900; }
+#tab-poster .poster-notes-box{ font-size: 9px; color:#0f172a; white-space: pre-wrap; word-break: break-word; min-height: 58px; }
+
+/* Price inside tile */
+#tab-poster .poster-item-price{ margin-top: 6px; align-self: flex-end; font-size: 10px; font-weight: 900; color: #0f172a; background: rgba(0,58,112,0.08); border: 1px solid rgba(0,58,112,0.18); padding: 4px 8px; border-radius: 999px; }
+
+
+/* A4 landscape: ensure single page output */
+#tab-poster .poster-a4-wrapper{
+  width: 1123px;              /* screen preview */
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+@media print{
+  @page { size: A4 landscape; margin: 8mm; }
+  html, body { width: 420mm; height: 297mm; }
+  #tab-poster .poster-a4-wrapper{ width: 100% !important; }
+  #tab-poster .poster-a4{
+    width: 100% !important;
+    height: auto !important;
+    box-shadow: none !important;
+    border: none !important;
+    overflow: hidden !important;
+  }
+  /* Avoid extra blank pages from large margins/spacing */
+  #tab-poster .poster-form,
+  #tab-poster .poster-header,
+  #tab-poster .poster-actions{
+    display: none !important;
+  }
+  #tab-poster .tab-panel{ padding: 0 !important; margin: 0 !important; }
+  #tab-poster .poster-a4-wrapper{ page-break-inside: avoid; }
+}
+
+
+/* === Poster print lock (A4 landscape, single page) === */
+@media print{
+  /* Print only the poster canvas */
+  body * { visibility: hidden !important; }
+  #tab-poster, #tab-poster * { visibility: visible !important; }
+
+  /* Remove any outer spacing that can trigger an extra page */
+  html, body { margin: 0 !important; padding: 0 !important; }
+
+  /* Hide controls/forms; keep just the poster */
+  #tab-poster .poster-form,
+  #tab-poster .poster-actions,
+  #tab-poster .poster-header,
+  #tab-poster .top-nav,
+  #tab-poster .site-header { display: none !important; }
+
+  /* Position poster at the top-left of the printed page */
+  #tab-poster{
+    position: relative !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  @page { size: A4 landscape; margin: 0mm; }
+
+  /* Exact A4 landscape sheet */
+  #tab-poster .poster-a4-wrapper{
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 420mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Poster canvas with safe inner padding */
+  #tab-poster .poster-a4{
+    width: 420mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+        overflow: hidden !important;
+    box-sizing: border-box !important;
+    padding: 10mm !important; /* printable safe area */
+  }
+
+  /* Tighten vertical space so 6–8 tiles + footer fit */
+  #tab-poster .poster-grid{
+    gap: 6mm !important;
+    margin-top: 6mm !important;
+  }
+
+  #tab-poster .poster-item{
+    box-sizing: border-box !important;
+    padding: 4mm !important;
+  }
+
+  /* Ensure images don't push height */
+  #tab-poster .poster-item-image{
+    /* Handled by flex but safety check */
+  }
+
+  /* Footer always visible and compact */
+  #tab-poster .poster-footer{
+    gap: 6mm !important;
+    margin-top: 6mm !important;
+  }
+  #tab-poster .poster-company-box,
+  #tab-poster .poster-notes{
+    padding: 4mm !important;
+  }
+  #tab-poster .poster-notes-box{
+    min-height: 18mm !important;
+  }
+}
+
+
+/* Print meta tweak: ensure last line (Cut + Price) never clips */
+@media print{
+  #tab-poster .poster-item-meta{
+    font-size: 8.2px !important;
+    line-height: 1.25 !important;
+    margin-top: 2mm !important;
+  }
+  #tab-poster .poster-meta-row{
+    gap: 3mm !important;
+  }
+  #tab-poster .poster-item{
+    padding-bottom: 6mm !important;
+  }
+  #tab-poster .poster-price-inline{
+    font-size: 8.2px !important;
+    padding: 1.2px 5px !important;
+  }
+}
+
+
+/* nowrap cut row + price so it doesn't wrap/clamp */
+@media print{
+  #tab-poster .poster-meta-row--cut{
+    flex-wrap: nowrap !important;
+  }
+  #tab-poster .poster-price-inline{
+    white-space: nowrap !important;
+  }
+}
+
+/* =========================================================
+   A3 PRINT FIX + BIGGER PRODUCT IMAGES (matches on-screen preview)
+   ========================================================= */
+
+/* Make product tiles use space better */
+.poster-item{
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+/* Slightly reduce meta font so image can grow */
+.poster-item-meta,
+.poster-item-sizes{
+  font-size: 0.7rem;
+}
+
+/* Ensure grid cells stretch properly */
+.poster-grid{
+  align-items: stretch;
+}
+
+/* ----- PRINT: force single A3 page and scale images up ----- */
+@media print{
+  @page { size: A3 landscape; margin: 0; }
+
+  html, body{
+    width: 420mm !important;
+    height: 297mm !important;
+    overflow: hidden !important;
+  }
+
+  /* Prevent page splitting */
+  #poster-a4, .poster-a4{
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    height: 297mm !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    padding: 8mm !important;
+  }
+
+  .poster-top{ margin-bottom: 8px !important; padding-bottom: 6px !important; }
+  .poster-grid{ gap: 10px !important; padding-top: 0 !important; }
+  .poster-footer{ gap: 10px !important; margin-top: 8px !important; }
+
+  /* Make images properly large in print */
+  .poster-item-image{
+    margin: 6px 0 6px !important;
+  }
+  .poster-item-image img{
+    object-fit: contain !important;
+  }
+
+  /* Keep text readable */
+  .poster-item-caption{ font-size: 9pt !important; }
+  .poster-item-meta, .poster-item-sizes{ font-size: 7.5pt !important; }
+  .poster-price-inline{ font-size: 8pt !important; }
+}
+
+
+/* =========================================================
+   PRINT OVERRIDES — POSTER ONLY (A3 Landscape, 1 page)
+   Notes:
+   - Scoped to #poster-a4 so the rest of the site is unaffected.
+   - Designed to match the on-page preview tile proportions (large image, clear text).
+   ========================================================= */
+@media print {
+  @page { size: A3 landscape; margin: 0; }
+
+  /* Hide everything except the poster */
+  body * { visibility: hidden !important; }
+  #poster-a4, #poster-a4 * { visibility: visible !important; }
+
+  /* Force the poster to fill one A3 landscape page */
+  html, body { width: 420mm; height: 297mm; margin: 0 !important; padding: 0 !important; background: #fff !important; }
+  #poster-a4 {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 420mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+    box-sizing: border-box !important;
+    background: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Layout inside poster */
+  #poster-a4 .poster-top { margin-bottom: 6mm !important; }
+  #poster-a4 .poster-footer { margin-top: 6mm !important; }
+
+  /* Use available height cleanly */
+  #poster-a4 { display: flex !important; flex-direction: column !important; }
+  #poster-a4 .poster-top { flex: 0 0 auto !important; }
+  #poster-a4 .poster-grid { flex: 1 1 auto !important; min-height: 0 !important; }
+  #poster-a4 .poster-footer { flex: 0 0 34mm !important; min-height: 34mm !important; }
+
+
+  /* Product tiles — match “creator preview” style */
+  #poster-a4 .poster-item {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    border: 1px solid #d8e2ef !important;
+    border-radius: 4mm !important;
+    background: #fff !important;
+    padding: 5mm !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  /* Header row inside tile */
+  #poster-a4 .poster-item-caption {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+    gap: 4mm !important;
+    margin-bottom: 2.5mm !important;
+  }
+  #poster-a4 .poster-item-code {
+    font-weight: 800 !important;
+    font-size: 12pt !important;
+    color: #0b1f33 !important;
+    letter-spacing: 0.2px !important;
+  }
+  #poster-a4 .poster-item-name {
+    font-weight: 700 !important;
+    font-size: 10pt !important;
+    color: #4a5b6b !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 55% !important;
+  }
+
+  /* Big central image */
+  #poster-a4 .poster-item-image {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 2mm 0 3mm !important;
+  }
+  #poster-a4 .poster-item-image img {
+    width: auto !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+  }
+
+  /* Meta block — readable, compact, stays inside tile */
+  #poster-a4 .poster-item-meta {
+    flex: 0 0 auto !important;
+    font-size: 9pt !important;
+    line-height: 1.22 !important;
+    color: #213244 !important;
+    margin-top: 0 !important;
+  }
+  #poster-a4 .poster-meta-row { display: grid !important; grid-template-columns: 18mm 1fr auto !important; column-gap: 2mm !important; align-items: baseline !important; }
+  #poster-a4 .poster-meta-key { font-weight: 800 !important; color: #0b1f33 !important; }
+  #poster-a4 .poster-meta-val { font-weight: 500 !important; }
+  #poster-a4 .poster-price-inline {
+    justify-self: end !important;
+    font-weight: 800 !important;
+    font-size: 9pt !important;
+    padding: 1mm 2.5mm !important;
+    border-radius: 3mm !important;
+    border: 1px solid #d8e2ef !important;
+    background: #f3f7fb !important;
+    color: #0b1f33 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Footer boxes — keep tidy at A3 */
+  #poster-a4 .poster-footer { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 6mm !important; }
+  
+  /* Apply border to .poster-notes (outer) instead of inner text box */
+  #poster-a4 .poster-company-box,
+  #poster-a4 .poster-notes {
+    border: 1px solid #d8e2ef !important;
+    border-radius: 4mm !important;
+    padding: 4mm !important;
+    background: #fff !important;
+    overflow: hidden !important;
+  }
+
+  /* Remove border from inner box */
+  #poster-a4 .poster-notes-box {
+      border: none !important;
+      padding: 0 !important;
+      background: none !important;
+  }
+
+  #poster-a4 .poster-footer-title { font-weight: 900 !important; font-size: 10pt !important; letter-spacing: 0.4px !important; color: #0b1f33 !important; margin-bottom: 2mm !important; }
+  
+  #poster-a4 .poster-company-box-lines { font-size: 9pt !important; line-height: 1.25 !important; color: #213244 !important; }
+
+  /* Increase notes text size to 11pt, but remove !important so JS can override it */
+  #poster-a4 .poster-notes-box { font-size: 11pt; line-height: 1.25 !important; color: #213244 !important; }
+}
+
+/* Screen stays exactly as-is */
+
+/* ------------------------------------------------------------
+   Poster (PRINT) – Requested refinements
+   - Blue banner behind product code & name
+   - Bigger meta text (Sizes/Brand/Coating/Cut)
+   - Remove extra gap between Coating and Cut
+   - City + Postcode line-break support
+   ------------------------------------------------------------ */
+
+@media print {
+  /* Blue banner inside each product tile */
+  #poster-a4 .poster-item { overflow: hidden; }
+  #poster-a4 .poster-item-caption {
+    background: #0a3a66 !important;
+    color: #ffffff !important;
+    padding: 4mm !important;
+    margin: 0 !important;
+    border-radius: 8px 8px 0 0 !important;
+    border-bottom: 0.4mm solid rgba(255,255,255,0.18) !important;
+  }
+  #poster-a4 .poster-item-caption * { color: #ffffff !important; }
+  #poster-a4 .poster-item-code { font-weight: 800 !important; letter-spacing: 0.2pt; }
+  #poster-a4 .poster-item-name { font-weight: 700 !important; opacity: 0.95; }
+
+  /* Make glove images larger but still keep to one page */
+  #poster-a4 .poster-item-image {
+    /* Height is handled by flex/grid dynamic sizing mostly, but ensure margins */
+    margin: 1mm 0 2mm !important;
+  }
+
+  /* Bigger meta text */
+  #poster-a4 .poster-item-meta { font-size: 10pt !important; line-height: 1.18 !important; }
+  #poster-a4 .poster-meta-key,
+  #poster-a4 .poster-meta-val { font-size: 10pt !important; }
+  #poster-a4 .poster-meta-key { font-weight: 800 !important; }
+
+  /* Remove the odd gap between coating and cut */
+  #poster-a4 .poster-item-meta { gap: 0.8mm !important; }
+  #poster-a4 .poster-meta-row { margin: 0 !important; }
+  #poster-a4 .poster-meta-row--cut { margin-top: 0 !important; }
+
+  /* City + Postcode newline support */
+  #poster-a4 [id^="poster-company-box-line-"] { white-space: pre-line !important; }
+}
+
+/* ===== Poster Print Preview (A3 Landscape) fixes – scoped to poster only ===== */
+@media print {
+
+  /* underline footer headings */
+  #poster-a4 .poster-footer-title{
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* Ensure distributor box shows ALL lines (incl. Website + Tel) */
+  #poster-a4 .poster-footer{
+    height: 40mm;
+    min-height: 40mm;
+  }
+  #poster-a4 .poster-company-box-lines{
+    line-height: 1.25;
+  }
+  #poster-a4 .poster-company-box-line{
+    display:block;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Blue banner behind product code + name */
+  #poster-a4 .poster-item-caption{
+    background: #0b4a72;
+    color: #fff;
+  }
+  #poster-a4 .poster-item-code,
+  #poster-a4 .poster-item-name{
+    color: #fff;
+  }
+
+  /* Bigger images (print only) */
+  #poster-a4 .poster-item-image{
+    width: 60%;
+    /* Max height constrained to fit rows */
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Bubble around Sizes/Brand/Coating/Cut + Price */
+  #poster-a4 .poster-item-meta{
+    background: #e9f3ff;
+    border: 1px solid #cfe3ff;
+    border-radius: 10px;
+    padding: 6px 8px;
+  }
+  #poster-a4 .poster-meta-row{
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+  }
+  /* remove any accidental extra gap between rows */
+  #poster-a4 .poster-meta-row + .poster-meta-row{
+    margin-top: 2px;
+  }
+  #poster-a4 .poster-meta-key,
+  #poster-a4 .poster-meta-val{
+    font-size: 11pt;
+  }
+  #poster-a4 .poster-meta-key{
+    font-weight: 700;
+  }
+
+  /* Price bubble */
+  #poster-a4 .poster-price-inline{
+    background: #d7ebff;
+    border: 1px solid #b8d7ff;
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-weight: 700;
+  }
+
+  /* Ensure Cut row doesn't create extra spacing */
+  #poster-a4 .poster-meta-row--cut{
+    margin-top: 0 !important;
+  }
+}
+
+
+
+/* =========================================================
+   PATCH: Button parity (Datasheet + Add to poster)
+   ========================================================= */
+.glove-card .glove-actions .datasheet-btn,
+.glove-card .glove-actions .poster-add-btn {
+  margin-top: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Keep datasheet as primary */
+.glove-card .glove-actions .datasheet-btn {
+  border: none;
+  background: var(--j1-blue);
+  color: #ffffff;
+}
+.glove-card .glove-actions .datasheet-btn:hover {
+  background: var(--j1-blue-dark);
+}
+
+/* Add-to-poster as secondary but same dimensions */
+.glove-card .glove-actions .poster-add-btn {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
+}
+.glove-card .glove-actions .poster-add-btn:hover {
+  background: #f3f4f6;
+}
+.glove-card .glove-actions .poster-add-btn.is-selected {
+  border-color: var(--j1-blue);
+  background: #e5edf6;
+  color: var(--j1-blue);
+}
+.glove-card .glove-actions .poster-add-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   PATCH: Poster print centering (CTRL+P / Save as PDF)
+   ========================================================= */
+@media print {
+  #poster-a4 .poster-item-image,
+  #poster-a4 .poster-item-imgwrap {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+  #poster-a4 .poster-item-image img,
+  #poster-a4 .poster-item-imgwrap img {
+    display: block !important;
+    margin: auto !important;
+    max-width: 96% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+}
+
+/* =========================================================
+   PATCH: Search by industry filter panel
+   - Height matches ~3 rows of product cards
+   - Checkbox list fills panel to bottom
+   - Anything beyond scrolls INSIDE the list
+   - Does NOT touch Search by features (so +/- still works)
+   ========================================================= */
+:root{
+  --glove-card-min-height: 320px;
+  --results-grid-gap: 1rem;
+  --results-header-allowance: 72px; /* heading + count + spacing */
+  --industry-filter-height-3rows: calc(
+    (3 * var(--glove-card-min-height)) +
+    (2 * var(--results-grid-gap)) +
+    var(--results-header-allowance)
+  );
+}
+
+/* Fix card height to 3 product rows */
+#filters-industry.filters{
+  height: var(--industry-filter-height-3rows);
+  max-height: var(--industry-filter-height-3rows);
+  overflow: hidden;              /* prevent card scrolling */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Let the single Industry section consume remaining height */
+#filters-industry .filter-section{
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Preserve collapse behaviour:
+   - when NOT collapsed, allow flex sizing (no 800px clamp)
+   - when collapsed, existing rule sets max-height:0 */
+#filters-industry .filter-section:not(.collapsed) .filter-section-body{
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;              /* scrolling happens in the list */
+  max-height: none;              /* remove 800px clamp (industry only) */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove the 260px clamp for industry list and make it the scroll container */
+#filters-industry .filter-section-body .filter-options,
+#filters-industry #filter-industry{
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  max-height: none;
+  overflow-y: auto;
+  padding-right: 8px;            /* room for scrollbar */
+  padding-bottom: 10px;          /* avoid last item clipping */
+}
+
+/* =========================================================
+   Poster EXPORT MODE (PDF)
+   - html2canvas captures screen styles, not @media print rules.
+   - This class temporarily applies the key print styling so the PDF matches CTRL+P.
+   ========================================================= */
+body.poster-export-mode #poster-a4{
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.poster-export-mode #poster-a4 .poster-remove-btn{ display:none !important; }
+
+/* Blue banner behind product code + name (like print) */
+body.poster-export-mode #poster-a4 .poster-item{ overflow: hidden !important; }
+body.poster-export-mode #poster-a4 .poster-item-caption{
+  background: #0b3b67 !important;
+  color: #ffffff !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  padding: 12px !important; /* uniform padding on all sides */
+  margin: -6px -6px 10px -6px !important; /* match .poster-item padding so banner is perfectly even */
+}
+body.poster-export-mode #poster-a4 .poster-item-caption *{ color: #ffffff !important; }
+
+/* Light blue meta panel (matches the print preview look) */
+body.poster-export-mode #poster-a4 .poster-item-meta{
+  width: 100% !important;
+  background: rgba(2, 132, 199, 0.10) !important;
+  border-top: 1px solid rgba(2, 132, 199, 0.18) !important;
+  border-radius: 0 0 12px 12px !important;
+  padding: 10px 10px 10px !important;
+  box-sizing: border-box !important;
+}
+
+
+/* Export mode footer - apply border to wrapper, remove from inner box */
+body.poster-export-mode #poster-a4 .poster-company-box,
+body.poster-export-mode #poster-a4 .poster-notes {
+  border: 1px solid #d8e2ef !important;
+  border-radius: 4mm !important;
+  padding: 4mm !important;
+  background: #fff !important;
+  overflow: hidden !important;
+}
+body.poster-export-mode #poster-a4 .poster-notes-box {
+  border: none !important;
+  padding: 0 !important;
+  background: none !important;
+}
+/* Increase notes size and allow override in export mode too */
+body.poster-export-mode #poster-a4 .poster-notes-box { font-size: 11pt; }
+
+/* ---------- Export overlay (PDF generation spinner) ---------- */
+.export-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17, 24, 39, 0.35);
+  z-index: 9999;
+  padding: 1.25rem;
+}
+
+.export-overlay.export-overlay--active {
+  display: flex;
+}
+
+.export-overlay-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.25);
+  padding: 1rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  max-width: 420px;
+  width: 100%;
+}
+
+.export-spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 0, 0, 0.15);
+  border-top-color: var(--j1-blue);
+  animation: exportSpin 0.9s linear infinite;
+  flex: 0 0 auto;
+}
+
+@keyframes exportSpin {
+  to { transform: rotate(360deg); }
+}
+
+.export-overlay-title {
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.15rem;
+}
+
+.export-overlay-sub {
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+
+/* Notes Toolbar in Modal */
+.notes-toolbar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 8px;
+  background: #f9fafb;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.notes-tool-btn {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+}
+
+.notes-tool-btn:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.notes-tool-btn.active {
+  background: #e5edf6;
+  border-color: var(--j1-blue);
+  color: var(--j1-blue);
+}
+
+.notes-size-display {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  min-width: 36px;
+  text-align: center;
+}
+
+/* =========================================================
+   CATALOGUE LANDING STYLES (NEW)
+   ========================================================= */
+
+.catalogue-landing {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.catalogue-wrapper {
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+}
+
+.catalogue-wrapper h2 {
+  font-size: 1.8rem;
+  margin: 0 0 0.5rem;
+  color: #111827;
+}
+
+.catalogue-wrapper p {
+  color: #4b5563;
+  margin: 0 0 2rem;
+  font-size: 1.05rem;
+}
+
+.catalogue-link-card {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 600px;
+  width: 100%;
+}
+
+.catalogue-link-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.catalogue-cover-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.catalogue-cta {
+  display: block;
+  background: var(--j1-blue);
+  color: #fff;
+  padding: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+}
+
+.catalogue-link-card:hover .catalogue-cta {
+  background: var(--j1-blue-dark);
+}
