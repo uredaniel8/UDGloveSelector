@@ -3540,7 +3540,6 @@ window.FILTERS =
     "Requirements",
     "Style",
     "Leather",
-    "Gauge",
-    "Test Category"
+    "Gauge"
   ]
 };
