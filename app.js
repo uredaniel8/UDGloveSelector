@@ -109,7 +109,9 @@
     add(BRAND_CATEGORY);
     catsFromFeatureCategories.forEach(add);
     catsFromCategoriesObject.forEach(add);
-    return merged.filter((c) => c !== INDUSTRY_CATEGORY);
+    return merged
+      .filter((c) => c !== INDUSTRY_CATEGORY)
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
   }
 
   const FEATURE_CATEGORIES = getFeatureCategoryOrder(FILTERS);
