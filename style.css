@@ -1378,6 +1378,21 @@ body {
   color: #6b7280;
 }
 
+.footer-admin-link {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  color: #9ca3af;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.footer-admin-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
 /* Responsive */
 
 @media (max-width: 768px) {
