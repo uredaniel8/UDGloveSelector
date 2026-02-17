@@ -670,7 +670,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 4. Clean and validate featureCategories
     const validFeatureCategories = (filters.featureCategories || []).filter(cat => 
-      filters.categories.hasOwnProperty(cat) && cat !== 'Brand' && cat !== 'Industry'
+      Object.prototype.hasOwnProperty.call(filters.categories, cat) && cat !== 'Brand' && cat !== 'Industry'
     );
 
     const cleanFilters = {
