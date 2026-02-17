@@ -85,6 +85,15 @@
     if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); go(); });
   });
 
+  // Hero buttons
+  document.querySelectorAll('.hero-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const tab = btn.dataset.goTab;
+      if (tab) showTab(tab);
+    });
+  });
+
   if (window.location.hash) {
     const h = window.location.hash.replace('#', '').trim();
     if (h) showTab(h);
