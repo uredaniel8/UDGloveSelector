@@ -72,19 +72,6 @@
     });
   });
 
-  document.querySelectorAll('.home-card').forEach((card) => {
-    const go = () => {
-      const tab = card.dataset.goTab;
-      if (tab) showTab(tab);
-    };
-    card.addEventListener('click', (e) => {
-      if (e.target && (e.target.closest('a') || e.target.closest('button'))) return;
-      go();
-    });
-    const btn = card.querySelector('.home-card-btn');
-    if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); go(); });
-  });
-
   // Hero buttons
   document.querySelectorAll('.hero-btn').forEach((btn) => {
     btn.addEventListener('click', (e) => {
