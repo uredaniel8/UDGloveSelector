@@ -527,10 +527,11 @@
     else els.posterGrid.classList.add('layout-0');
 
     const addMetaRow = (root, label, value) => {
-      if (value === undefined || value === null) return;
       const isArr = Array.isArray(value);
-      const str = isArr ? value.filter(Boolean).join(', ') : String(value).trim();
-      if (!str) return;
+      const raw = (value === undefined || value === null)
+        ? ''
+        : (isArr ? value.filter(Boolean).join(', ') : String(value).trim());
+      const str = raw || '—';
       const row = document.createElement('div');
       row.className = 'poster-meta-row';
       const k = document.createElement('span');
@@ -574,12 +575,12 @@
       const sizesStr = Array.isArray(glove.sizes) ? glove.sizes.join(', ') : (glove.sizes || '');
       addMetaRow(meta, 'Sizes', sizesStr);
       addMetaRow(meta, 'Brand', glove.brand);
-      addMetaRow(meta, glove.coating ? 'Coating' : 'Leather', glove.coating || glove.leather);
+      addMetaRow(meta, glove.coating ? 'Coating' : (glove.leather ? 'Leather' : 'Coating'), glove.coating || glove.leather);
       
       const cutVal = (glove.cutLevel ?? '').toString().trim();
       const rawPrice = posterPrices.get(code) || '';
       const priceVal = String(rawPrice || '').trim();
-      if (cutVal || priceVal) {
+      {
         const row = document.createElement('div');
         row.className = 'poster-meta-row poster-meta-row--cut';
         const k = document.createElement('span');
