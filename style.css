@@ -586,20 +586,21 @@ body {
 
 .glove-header {
   display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  align-items: baseline;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .glove-code {
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--j1-blue);
+  white-space: nowrap;
 }
 
 .glove-name {
   font-size: 0.85rem;
   color: #6b7280;
+  overflow-wrap: break-word;
 }
 
 .glove-specs {
