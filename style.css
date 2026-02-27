@@ -115,12 +115,27 @@ body {
   margin-top: 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
+}
+
+.home-hero {
+  background: linear-gradient(135deg, var(--j1-blue) 0%, #005aa7 60%, #0070cc 100%);
+  border-radius: 1.25rem;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 58, 112, 0.25);
 }
 
 .home-copy h2 {
   margin-top: 0;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.home-hero .home-copy h2 {
+  color: #ffffff;
+  margin-bottom: 0.75rem;
 }
 
 .home-copy p {
@@ -129,33 +144,44 @@ body {
   color: #374151;
 }
 
+.home-hero .home-copy p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+}
+
 .home-note {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   font-size: 0.85rem;
   color: #6b7280;
+}
+
+.home-hero .home-note {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
 }
 
 /* two big cards side by side */
 .home-options {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
+  gap: 1.5rem;
+  align-items: stretch;
 }
 
 .home-card {
   background: #ffffff;
-  border-radius: 0.9rem;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+  border-radius: 1.1rem;
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.14);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .home-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.2);
 }
 
 .home-card-image-wrap {
@@ -174,28 +200,36 @@ body {
 }
 
 .home-card-body {
-  padding: 0.8rem 1rem 1rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .home-card-body h3 {
-  margin: 0 0 0.25rem;
-  font-size: 1rem;
+  margin: 0 0 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .home-card-body p {
-  margin: 0 0 0.6rem;
-  font-size: 0.85rem;
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
   color: #4b5563;
 }
 
 .home-card-btn {
+  align-self: flex-start;
   border-radius: 999px;
   border: none;
-  padding: 0.45rem 0.9rem;
-  font-size: 0.85rem;
+  padding: 0.6rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
   background: var(--j1-blue);
   color: #fff;
+  letter-spacing: 0.01em;
 }
 
 .home-card-btn:hover {
@@ -1396,6 +1430,14 @@ body {
 @media (max-width: 768px) {
   .home-layout {
     flex-direction: column;
+  }
+
+  .home-hero {
+    padding: 2rem 1.25rem;
+  }
+
+  .home-hero .home-copy h2 {
+    font-size: 1.5rem;
   }
 
   .home-options {
