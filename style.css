@@ -1007,11 +1007,10 @@ body {
 }
 
 .poster-item-image img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  display: block;
 }
 
 .poster-item-meta {
@@ -1754,13 +1753,6 @@ body {
 #tab-poster .poster-item-price{ margin-top: 6px; align-self: flex-end; font-size: 10px; font-weight: 900; color: #0f172a; background: rgba(0,58,112,0.08); border: 1px solid rgba(0,58,112,0.18); padding: 4px 8px; border-radius: 999px; }
 
 
-/* A4 landscape: ensure single page output */
-#tab-poster .poster-a4-wrapper{
-  width: 1123px;              /* screen preview */
-  max-width: 100%;
-  margin: 0 auto;
-}
-
 @media print{
   @page { size: A4 landscape; margin: 8mm; }
   html, body { width: 420mm; height: 297mm; }
@@ -1894,24 +1886,6 @@ body {
 /* =========================================================
    A3 PRINT FIX + BIGGER PRODUCT IMAGES (matches on-screen preview)
    ========================================================= */
-
-/* Make product tiles use space better */
-.poster-item{
-  align-items: stretch;
-  justify-content: flex-start;
-  padding: 10px;
-}
-
-/* Slightly reduce meta font so image can grow */
-.poster-item-meta,
-.poster-item-sizes{
-  font-size: 0.7rem;
-}
-
-/* Ensure grid cells stretch properly */
-.poster-grid{
-  align-items: stretch;
-}
 
 /* ----- PRINT: force single A3 page and scale images up ----- */
 @media print{
