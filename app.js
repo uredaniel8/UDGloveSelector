@@ -198,6 +198,23 @@
 
   const POSTER_MAX = 10;
 
+  function createStandardsBadge(glove) {
+    const stdIcon = (glove.standardsIcon || '').trim();
+    const stdCode = (glove.standardsCode || '').trim();
+    if (!stdIcon || !stdCode) return null;
+    const badge = document.createElement('div');
+    badge.className = 'standards-badge';
+    const badgeImg = document.createElement('img');
+    badgeImg.src = stdIcon;
+    badgeImg.alt = stdCode;
+    const badgeTxt = document.createElement('span');
+    badgeTxt.className = 'standards-badge-code';
+    badgeTxt.textContent = stdCode;
+    badge.appendChild(badgeImg);
+    badge.appendChild(badgeTxt);
+    return badge;
+  }
+
   function createGloveCard(glove) {
     const card = document.createElement('article');
     card.className = 'glove-card';
@@ -215,6 +232,9 @@
     magnify.title = 'View image';
     magnify.addEventListener('click', () => openLightbox(glove.image || ''));
     imgWrap.appendChild(magnify);
+
+    const stdBadge = createStandardsBadge(glove);
+    if (stdBadge) imgWrap.appendChild(stdBadge);
 
     const head = document.createElement('div');
     head.className = 'glove-header';
@@ -569,6 +589,9 @@
       img.alt = glove.code || '';
       img.loading = 'lazy';
       imgWrap.appendChild(img);
+
+      const posterBadge = createStandardsBadge(glove);
+      if (posterBadge) imgWrap.appendChild(posterBadge);
 
       const meta = document.createElement('div');
       meta.className = 'poster-item-meta';
