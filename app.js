@@ -593,29 +593,17 @@
       meta.className = 'poster-item-meta';
       const sizesStr = Array.isArray(glove.sizes) ? glove.sizes.join(', ') : (glove.sizes || '');
       addMetaRow(meta, 'Sizes', sizesStr);
-      addMetaRow(meta, 'Brand', glove.brand);
       addMetaRow(meta, glove.coating ? 'Coating' : (glove.leather ? 'Leather' : 'Coating'), glove.coating || glove.leather);
-      
-      const cutVal = (glove.cutLevel ?? '').toString().trim();
+      if (glove.standardsCode) addMetaRow(meta, 'Standards', glove.standardsCode);
       const rawPrice = posterPrices.get(code) || '';
       const priceVal = String(rawPrice || '').trim();
-      {
+      if (priceVal) {
         const row = document.createElement('div');
         row.className = 'poster-meta-row poster-meta-row--cut';
-        const k = document.createElement('span');
-        k.className = 'poster-meta-key';
-        k.textContent = 'Cut:';
-        const v = document.createElement('span');
-        v.className = 'poster-meta-val poster-meta-cut-val';
-        v.textContent = cutVal || '—';
-        row.appendChild(k);
-        row.appendChild(v);
-        if (priceVal) {
-          const p = document.createElement('span');
-          p.className = 'poster-price-inline';
-          p.textContent = priceVal.startsWith('£') ? priceVal : `£${priceVal}`;
-          row.appendChild(p);
-        }
+        const p = document.createElement('span');
+        p.className = 'poster-price-inline';
+        p.textContent = priceVal.startsWith('£') ? priceVal : `£${priceVal}`;
+        row.appendChild(p);
         meta.appendChild(row);
       }
       if (!meta.children.length) meta.style.display = 'none';
