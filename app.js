@@ -768,10 +768,91 @@
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
   }
 
-  // Enforced PDF compression settings – fixed to keep poster PDFs under 10 MB.
+  // Enforced PDF compression settings – adaptive to keep poster PDFs under 10 MB.
   // scale   : html2canvas render resolution multiplier
-  // quality : JPEG compression 0.0–1.0
+  // quality : initial JPEG compression 0.0–1.0
   const PDF_QUALITY = { scale: 1.5, quality: 0.72 };
+
+  // --- Adaptive PDF size helpers ---
+
+  // Wraps canvas.toBlob in a Promise so we can await it.
+  function canvasToJpegBlob(canvas, quality) {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => (blob ? resolve(blob) : reject(new Error('toBlob returned null'))),
+        'image/jpeg',
+        quality
+      );
+    });
+  }
+
+  // Returns a new canvas drawn at (canvas.width * factor) x (canvas.height * factor).
+  function downscaleCanvas(canvas, factor) {
+    const w = Math.max(1, Math.round(canvas.width * factor));
+    const h = Math.max(1, Math.round(canvas.height * factor));
+    const scaled = document.createElement('canvas');
+    scaled.width = w;
+    scaled.height = h;
+    const ctx = scaled.getContext('2d');
+    ctx.drawImage(canvas, 0, 0, w, h);
+    return scaled;
+  }
+
+  // Converts a Blob to a data URL.
+  function blobToDataUrl(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  // Adaptive encode: tries quality sweep first, then downscaling, until under maxBytes.
+  // Returns { dataUrl, qualityUsed, scaleFactorUsed, bytes }.
+  async function encodePosterImageUnderLimit(canvas, {
+    maxBytes = 9.5 * 1024 * 1024,
+    initialQuality = 0.72,
+    minQuality = 0.40,
+    qualityStep = 0.04,
+    initialScaleFactor = 1.0,
+    minScaleFactor = 0.30,
+    scaleStep = 0.10,
+    maxAttempts = 40
+  } = {}) {
+    let scaleFactor = initialScaleFactor;
+    let attempts = 0;
+
+    while (scaleFactor >= minScaleFactor && attempts < maxAttempts) {
+      const workCanvas = scaleFactor < 1.0
+        ? downscaleCanvas(canvas, scaleFactor)
+        : canvas;
+
+      let quality = initialQuality;
+      while (quality >= minQuality - 1e-9 && attempts < maxAttempts) {
+        attempts++;
+        // Yield to keep the UI from freezing between attempts.
+        await new Promise((r) => setTimeout(r, 0));
+        const blob = await canvasToJpegBlob(workCanvas, quality);
+        console.debug(`PDF encode attempt ${attempts}: scale=${scaleFactor.toFixed(2)}, quality=${quality.toFixed(2)}, bytes=${blob.size}`);
+        if (blob.size <= maxBytes) {
+          const dataUrl = await blobToDataUrl(blob);
+          console.log(`PDF export: using scale=${scaleFactor.toFixed(2)}, quality=${quality.toFixed(2)}, bytes=${blob.size}`);
+          return { dataUrl, qualityUsed: quality, scaleFactorUsed: scaleFactor, bytes: blob.size };
+        }
+        quality = Math.round((quality - qualityStep) * 100) / 100;
+      }
+      scaleFactor = Math.round((scaleFactor - scaleStep) * 100) / 100;
+    }
+
+    // Fallback: best-effort at minimum settings.
+    const finalScale = Math.max(minScaleFactor, scaleFactor);
+    const workCanvas = finalScale < 1.0 ? downscaleCanvas(canvas, finalScale) : canvas;
+    const blob = await canvasToJpegBlob(workCanvas, minQuality);
+    const dataUrl = await blobToDataUrl(blob);
+    console.warn(`PDF export fallback: scale=${finalScale.toFixed(2)}, quality=${minQuality}, bytes=${blob.size}`);
+    return { dataUrl, qualityUsed: minQuality, scaleFactorUsed: finalScale, bytes: blob.size };
+  }
 
   if (els.downloadPoster && els.posterA4 && window.html2canvas) {
     els.downloadPoster.addEventListener('click', async () => {
@@ -841,8 +922,10 @@
           });
           const pageW = pdf.internal.pageSize.getWidth();
           const pageH = pdf.internal.pageSize.getHeight();
-          const imgData = canvas.toDataURL('image/jpeg', preset.quality);
-          pdf.addImage(imgData, 'JPEG', 0, 0, pageW, pageH, undefined, 'FAST');
+          const { dataUrl } = await encodePosterImageUnderLimit(canvas, {
+            initialQuality: preset.quality
+          });
+          pdf.addImage(dataUrl, 'JPEG', 0, 0, pageW, pageH, undefined, 'FAST');
           pdf.save('poster.pdf');
         } else {
           window.print();
