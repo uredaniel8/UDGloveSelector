@@ -768,9 +768,21 @@
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
   }
 
+  // PDF compression presets ─ trade off file size vs. visual quality.
+  // scale   : html2canvas render resolution multiplier (higher = sharper but bigger)
+  // quality : JPEG compression 0.0–1.0 (lower = smaller file, more artefacts)
+  const PDF_PRESETS = {
+    screen:  { scale: 1.5, quality: 0.60 }, // ~smallest – screen viewing / heavy compression
+    ebook:   { scale: 2,   quality: 0.75 }, // default – balanced size/quality
+    printer: { scale: 3,   quality: 0.92 }  // highest quality – larger file
+  };
+  const DEFAULT_PDF_PRESET = 'ebook';
+
   if (els.downloadPoster && els.posterA4 && window.html2canvas) {
     els.downloadPoster.addEventListener('click', async () => {
       const EXPORT_CLASS = 'poster-export-mode';
+      const presetKey = (document.getElementById('pdf-quality-preset') || {}).value || DEFAULT_PDF_PRESET;
+      const preset = PDF_PRESETS[presetKey] || PDF_PRESETS[DEFAULT_PDF_PRESET];
       const overlay = document.getElementById('export-overlay');
       const btn = els.downloadPoster;
       const btnLabel = btn ? btn.textContent : '';
@@ -801,7 +813,7 @@
         await waitForPosterAssets(els.posterA4);
         const printCss = extractPrintCssForCapture();
         const canvas = await window.html2canvas(els.posterA4, {
-          scale: 3,
+          scale: preset.scale,
           useCORS: true,
           allowTaint: true,
           backgroundColor: '#ffffff',
@@ -835,7 +847,7 @@
           });
           const pageW = pdf.internal.pageSize.getWidth();
           const pageH = pdf.internal.pageSize.getHeight();
-          const imgData = canvas.toDataURL('image/jpeg', 1.0);
+          const imgData = canvas.toDataURL('image/jpeg', preset.quality);
           pdf.addImage(imgData, 'JPEG', 0, 0, pageW, pageH, undefined, 'FAST');
           pdf.save('poster.pdf');
         } else {
