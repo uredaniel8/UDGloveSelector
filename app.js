@@ -586,15 +586,16 @@
       img.alt = glove.code || '';
       imgWrap.appendChild(img);
 
-      const posterBadge = createStandardsBadge(glove);
-      if (posterBadge) imgWrap.appendChild(posterBadge);
-
       const meta = document.createElement('div');
       meta.className = 'poster-item-meta';
       const sizesStr = Array.isArray(glove.sizes) ? glove.sizes.join(', ') : (glove.sizes || '');
       addMetaRow(meta, 'Sizes', sizesStr);
       addMetaRow(meta, glove.coating ? 'Coating' : (glove.leather ? 'Leather' : 'Coating'), glove.coating || glove.leather);
-      if (glove.standardsCode) addMetaRow(meta, 'Standards', glove.standardsCode);
+      const posterBadge = createStandardsBadge(glove);
+      if (posterBadge) {
+        posterBadge.classList.add('standards-badge--meta');
+        meta.appendChild(posterBadge);
+      }
       const rawPrice = posterPrices.get(code) || '';
       const priceVal = String(rawPrice || '').trim();
       if (priceVal) {
