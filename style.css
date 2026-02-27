@@ -2365,25 +2365,36 @@ body.poster-export-mode #poster-a4{
 
 body.poster-export-mode #poster-a4 .poster-remove-btn{ display:none !important; }
 
-/* Blue banner behind product code + name (like print) */
-body.poster-export-mode #poster-a4 .poster-item{ overflow: hidden !important; }
+/* Blue banner behind product code + name (like print).
+   Negative margins and width: calc() were removed because html2canvas applies
+   subpixel rounding that causes uneven border thickness on the exported PDF.
+   Instead, .poster-item padding is zeroed and overflow: hidden + border-radius
+   clips children to the card corners cleanly. */
+body.poster-export-mode #poster-a4 .poster-item{
+  overflow: hidden !important;
+  padding: 0 !important;
+}
 body.poster-export-mode #poster-a4 .poster-item-caption{
   background: #0b3b67 !important;
   color: #ffffff !important;
   box-sizing: border-box !important;
   width: 100% !important;
-  padding: 12px !important; /* uniform padding on all sides */
-  margin: -6px -6px 10px -6px !important; /* match .poster-item padding so banner is perfectly even */
+  padding: 12px !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
 }
 body.poster-export-mode #poster-a4 .poster-item-caption *{ color: #ffffff !important; }
 
 /* Ensure product image and standards overlay are both captured by html2canvas.
    position: relative keeps the overlay's absolute positioning context correct;
    overflow: visible prevents the absolutely-positioned standards badge from
-   being clipped, which could make it appear to replace the product image. */
+   being clipped, which could make it appear to replace the product image.
+   Horizontal padding restores the side spacing previously provided by
+   .poster-item's padding (now zeroed in export mode). */
 body.poster-export-mode #poster-a4 .poster-item-image {
   position: relative !important;
   overflow: visible !important;
+  padding: 4px 12px 0 !important;
 }
 
 /* Light blue meta panel (matches the print preview look) */
@@ -2391,8 +2402,9 @@ body.poster-export-mode #poster-a4 .poster-item-meta{
   width: 100% !important;
   background: rgba(2, 132, 199, 0.10) !important;
   border-top: 1px solid rgba(2, 132, 199, 0.18) !important;
-  border-radius: 0 0 12px 12px !important;
-  padding: 10px 10px 10px !important;
+  border-radius: 0 !important;
+  padding: 8px 10px !important; /* matches base .poster-item-meta padding */
+  margin: 0 !important;
   box-sizing: border-box !important;
 }
 
