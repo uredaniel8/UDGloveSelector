@@ -2380,6 +2380,15 @@ body.poster-export-mode #poster-a4 .poster-item-caption{
 }
 body.poster-export-mode #poster-a4 .poster-item-caption *{ color: #ffffff !important; }
 
+/* Ensure product image and standards overlay are both captured by html2canvas.
+   position: relative keeps the overlay's absolute positioning context correct;
+   overflow: visible prevents the absolutely-positioned standards badge from
+   being clipped, which could make it appear to replace the product image. */
+body.poster-export-mode #poster-a4 .poster-item-image {
+  position: relative !important;
+  overflow: visible !important;
+}
+
 /* Light blue meta panel (matches the print preview look) */
 body.poster-export-mode #poster-a4 .poster-item-meta{
   width: 100% !important;

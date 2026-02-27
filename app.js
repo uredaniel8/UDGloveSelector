@@ -584,7 +584,6 @@
       const img = document.createElement('img');
       img.src = glove.image || '';
       img.alt = glove.code || '';
-      img.loading = 'lazy';
       imgWrap.appendChild(img);
 
       const posterBadge = createStandardsBadge(glove);
@@ -804,6 +803,7 @@
         const canvas = await window.html2canvas(els.posterA4, {
           scale: 3,
           useCORS: true,
+          allowTaint: true,
           backgroundColor: '#ffffff',
           onclone: (clonedDoc) => {
             clonedDoc.body.classList.add(EXPORT_CLASS);
@@ -812,6 +812,12 @@
               posterTab.style.display = 'block';
               posterTab.classList.add('tab-panel--active');
             }
+            // Force all images to load eagerly in the off-screen clone so
+            // html2canvas can capture them (lazy images may not load in a
+            // headless/offscreen context and would render blank).
+            clonedDoc.querySelectorAll('img').forEach((img) => {
+              img.loading = 'eager';
+            });
             if (printCss) {
               const style = clonedDoc.createElement('style');
               style.textContent = printCss.replace(/@media\s+print/gi, '@media all');
