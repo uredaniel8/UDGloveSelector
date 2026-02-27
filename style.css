@@ -785,22 +785,6 @@ body {
   font-size: 0.85rem;
 }
 
-.pdf-quality-label {
-  font-size: 0.85rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.pdf-quality-select {
-  font-size: 0.8rem;
-  padding: 0.25rem 0.4rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  background: #fff;
-  cursor: pointer;
-}
-
 .upload-label {
   font-size: 0.8rem;
   display: inline-flex;
