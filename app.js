@@ -233,9 +233,6 @@
     magnify.addEventListener('click', () => openLightbox(glove.image || ''));
     imgWrap.appendChild(magnify);
 
-    const stdBadge = createStandardsBadge(glove);
-    if (stdBadge) imgWrap.appendChild(stdBadge);
-
     const head = document.createElement('div');
     head.className = 'glove-header';
     const code = document.createElement('div');
