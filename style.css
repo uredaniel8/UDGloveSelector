@@ -2493,6 +2493,43 @@ body.poster-export-mode #poster-a4 .poster-notes-box { font-size: 11pt; }
   color: #4b5563;
 }
 
+/* Export toast notification */
+.export-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(0.5rem);
+  padding: 0.65rem 1.1rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.18);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 10000;
+  max-width: 420px;
+  width: max-content;
+  text-align: center;
+  pointer-events: none;
+}
+
+.export-toast--visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.export-toast--info {
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+
+.export-toast--warn {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
 
 /* Notes Toolbar in Modal */
 .notes-toolbar {

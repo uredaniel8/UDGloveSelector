@@ -768,15 +768,158 @@
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
   }
 
-  // Enforced PDF compression settings – fixed to keep poster PDFs under 10 MB.
-  // scale   : html2canvas render resolution multiplier
-  // quality : JPEG compression 0.0–1.0
-  const PDF_QUALITY = { scale: 1.5, quality: 0.72 };
+  // Maximum embedded JPEG size (bytes) – leaves headroom for PDF container overhead.
+  const PDF_JPEG_TARGET_BYTES = 9.5 * 1024 * 1024; // 9.5 MB
+  // html2canvas render resolution multiplier.
+  const PDF_INITIAL_SCALE = 1.5;
+
+  /**
+   * Encodes a canvas as a JPEG Blob at the given quality.
+   * Falls back to a DataURL→Blob conversion if canvas.toBlob is unavailable.
+   * @param {HTMLCanvasElement} canvas
+   * @param {number} quality - JPEG quality 0.0–1.0
+   * @returns {Promise<Blob>}
+   */
+  function canvasToJpegBlob(canvas, quality) {
+    return new Promise((resolve, reject) => {
+      if (typeof canvas.toBlob === 'function') {
+        canvas.toBlob(
+          (blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error('canvas.toBlob returned null'));
+          },
+          'image/jpeg',
+          quality
+        );
+      } else {
+        // Fallback for browsers without canvas.toBlob
+        try {
+          const dataUrl = canvas.toDataURL('image/jpeg', quality);
+          const byteStr = atob(dataUrl.split(',')[1]);
+          const arr = new Uint8Array(byteStr.length);
+          for (let i = 0; i < byteStr.length; i++) arr[i] = byteStr.charCodeAt(i);
+          resolve(new Blob([arr], { type: 'image/jpeg' }));
+        } catch (e) {
+          reject(e);
+        }
+      }
+    });
+  }
+
+  /**
+   * Creates a new canvas that is a downscaled copy of the source canvas.
+   * @param {HTMLCanvasElement} source
+   * @param {number} factor - scale factor (e.g. 0.9 keeps 90% of dimensions)
+   * @returns {HTMLCanvasElement}
+   */
+  function downscaleCanvas(source, factor) {
+    const w = Math.max(1, Math.floor(source.width * factor));
+    const h = Math.max(1, Math.floor(source.height * factor));
+    const out = document.createElement('canvas');
+    out.width = w;
+    out.height = h;
+    const ctx = out.getContext('2d');
+    ctx.drawImage(source, 0, 0, w, h);
+    return out;
+  }
+
+  /**
+   * Converts a Blob to a base64 DataURL string.
+   * @param {Blob} blob
+   * @returns {Promise<string>}
+   */
+  function blobToDataUrl(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(/** @type {string} */ (reader.result));
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  /**
+   * Iteratively compresses a canvas to a JPEG that fits within targetBytes.
+   * Phase 1: lowers JPEG quality (from 0.92 down to 0.30) in steps of 0.05.
+   * Phase 2: downscales the canvas by 10% per step until under target or floor reached.
+   * @param {HTMLCanvasElement} canvas
+   * @param {number} targetBytes
+   * @returns {Promise<{dataUrl: string, optimized: boolean, underTarget: boolean}>}
+   */
+  async function optimizeCanvasToTargetBytes(canvas, targetBytes) {
+    const QUALITY_START = 0.92;
+    const QUALITY_MIN   = 0.30;
+    const QUALITY_STEP  = 0.05;
+    const QUALITY_EPSILON = 0.001; // floating-point tolerance for quality comparisons
+    const SCALE_STEP    = 0.9;
+    const SCALE_MIN     = 0.25; // stop downscaling below 25% of original
+
+    let quality = QUALITY_START;
+    let currentCanvas = canvas;
+    let cumulativeScale = 1.0;
+    let optimized = false;
+
+    // Phase 1: reduce JPEG quality until under target
+    while (quality >= QUALITY_MIN - QUALITY_EPSILON) {
+      const blob = await canvasToJpegBlob(currentCanvas, quality);
+      if (blob.size <= targetBytes) {
+        const dataUrl = await blobToDataUrl(blob);
+        return { dataUrl, optimized, underTarget: true };
+      }
+      optimized = true;
+      quality = parseFloat((quality - QUALITY_STEP).toFixed(2));
+    }
+
+    // Phase 2: downscale canvas and retry at minimum quality
+    quality = QUALITY_MIN;
+    while (cumulativeScale > SCALE_MIN) {
+      currentCanvas = downscaleCanvas(currentCanvas, SCALE_STEP);
+      cumulativeScale *= SCALE_STEP;
+      const blob = await canvasToJpegBlob(currentCanvas, quality);
+      if (blob.size <= targetBytes) {
+        const dataUrl = await blobToDataUrl(blob);
+        return { dataUrl, optimized: true, underTarget: true };
+      }
+    }
+
+    // Could not reach target; export best effort and warn
+    const blob = await canvasToJpegBlob(currentCanvas, quality);
+    const dataUrl = await blobToDataUrl(blob);
+    console.warn(
+      'PDF export: could not reach target of', targetBytes,
+      'bytes; exported size:', blob.size
+    );
+    return { dataUrl, optimized: true, underTarget: false };
+  }
+
+  /**
+   * Shows a brief non-blocking toast notification below the poster controls.
+   * @param {string} message
+   * @param {'info'|'warn'} type
+   * @param {number} [duration] - auto-dismiss after ms (default 5000)
+   */
+  function showExportToast(message, type, duration) {
+    const ms = typeof duration === 'number' ? duration : 5000;
+    const existing = document.getElementById('export-toast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.id = 'export-toast';
+    toast.className = 'export-toast export-toast--' + type;
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    // Trigger reflow so the CSS transition fires on the next frame
+    void toast.offsetHeight;
+    toast.classList.add('export-toast--visible');
+    setTimeout(() => {
+      toast.classList.remove('export-toast--visible');
+      toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+    }, ms);
+  }
 
   if (els.downloadPoster && els.posterA4 && window.html2canvas) {
     els.downloadPoster.addEventListener('click', async () => {
       const EXPORT_CLASS = 'poster-export-mode';
-      const preset = PDF_QUALITY;
       const overlay = document.getElementById('export-overlay');
       const btn = els.downloadPoster;
       const btnLabel = btn ? btn.textContent : '';
@@ -807,7 +950,7 @@
         await waitForPosterAssets(els.posterA4);
         const printCss = extractPrintCssForCapture();
         const canvas = await window.html2canvas(els.posterA4, {
-          scale: preset.scale,
+          scale: PDF_INITIAL_SCALE,
           useCORS: true,
           allowTaint: true,
           backgroundColor: '#ffffff',
@@ -841,9 +984,25 @@
           });
           const pageW = pdf.internal.pageSize.getWidth();
           const pageH = pdf.internal.pageSize.getHeight();
-          const imgData = canvas.toDataURL('image/jpeg', preset.quality);
-          pdf.addImage(imgData, 'JPEG', 0, 0, pageW, pageH, undefined, 'FAST');
+
+          // Adaptively compress the canvas image to stay under the size target
+          const { dataUrl, optimized, underTarget } = await optimizeCanvasToTargetBytes(
+            canvas,
+            PDF_JPEG_TARGET_BYTES
+          );
+
+          pdf.addImage(dataUrl, 'JPEG', 0, 0, pageW, pageH, undefined, 'FAST');
           pdf.save('poster.pdf');
+
+          if (!underTarget) {
+            showExportToast(
+              'PDF could not be reduced below 10 MB. Try removing items or images and export again.',
+              'warn',
+              7000
+            );
+          } else if (optimized) {
+            showExportToast('PDF was optimized to stay under 10 MB.', 'info', 4000);
+          }
         } else {
           window.print();
         }

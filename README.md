@@ -5,23 +5,24 @@ Just1Source - Glove Selector
 
 When users click **Download PDF** on the Poster Creator tab, the poster is rendered to a JPEG image via [html2canvas](https://html2canvas.hertzen.com/) and packaged into a PDF using [jsPDF](https://github.com/parallax/jsPDF).
 
-A single, fixed compression setting is enforced to keep poster PDFs consistently under 10 MB:
+An **adaptive compression pipeline** enforces a strict **< 10 MB** size cap on every export.
 
-| Setting | Value | Notes |
-|---|---|---|
-| html2canvas scale | 1.5× | Balances sharpness and file size |
-| JPEG quality | 0.72 | Good visual fidelity with strong compression |
+### How the adaptive pipeline works
 
-### Compression configuration
+1. The poster is rendered to a canvas at **1.5× scale** via html2canvas.
+2. The canvas is encoded as a JPEG `Blob` so its exact byte size can be measured.
+3. If the JPEG exceeds the **9.5 MB** embedded-image budget (leaving headroom for PDF container overhead), the exporter iterates:
+   - **Phase 1 – quality reduction**: JPEG quality is lowered in steps of 0.05, from 0.92 down to a floor of 0.30.
+   - **Phase 2 – canvas downscaling**: If quality alone is insufficient, the canvas is downscaled by 10% per step until the target is met or the canvas reaches 25% of its original size.
+4. The first combination of quality and scale that satisfies the target is used; the rest are discarded.
 
-The settings are defined in `app.js` as `PDF_QUALITY`:
+### User-facing feedback
 
-```js
-const PDF_QUALITY = { scale: 1.5, quality: 0.72 };
-```
-
-- **`scale`** – the html2canvas render multiplier. Higher values produce sharper output but increase file size proportionally to `scale²`.
-- **`quality`** – JPEG compression level from `0.0` (maximum compression, most artefacts) to `1.0` (minimal compression, highest quality). Values below `0.5` produce visible artefacts on text.
+| Scenario | Message shown |
+|---|---|
+| PDF optimized (quality/scale reduced) | "PDF was optimized to stay under 10 MB." |
+| Cannot reach < 10 MB | "PDF could not be reduced below 10 MB. Try removing items or images and export again." |
+| Normal export (already under budget) | No message |
 
 ### Manual validation
 
