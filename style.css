@@ -1003,6 +1003,7 @@ body {
   justify-content: center;
   min-height: 0;
   margin: 4px 0;
+  position: relative;
 }
 
 .poster-item-image img {
@@ -1111,6 +1112,57 @@ body {
   text-align: center;
 }
 
+
+/* =========================================================
+   STANDARDS BADGE
+   ========================================================= */
+.standards-badge {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 58, 112, 0.25);
+  border-radius: 6px;
+  padding: 3px 5px;
+  gap: 2px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.standards-badge img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
+.standards-badge-code {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #003a70;
+  text-align: center;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* Smaller badge inside poster tiles */
+.poster-item-image .standards-badge {
+  bottom: 4px;
+  right: 4px;
+  padding: 2px 3px;
+}
+
+.poster-item-image .standards-badge img {
+  width: 18px;
+  height: 18px;
+}
+
+.poster-item-image .standards-badge-code {
+  font-size: 0.5rem;
+}
 
 /* =========================================================
    MODALS
