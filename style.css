@@ -2295,6 +2295,29 @@ body {
     object-fit: contain !important;
     object-position: center center !important;
   }
+
+  /* Standards badge: keep as a small fixed badge in the bottom-right corner */
+  #poster-a4 .poster-item-image .standards-badge {
+    position: absolute !important;
+    bottom: 4px !important;
+    right: 4px !important;
+    width: auto !important;
+    max-width: none !important;
+    z-index: 2 !important;
+  }
+  #poster-a4 .poster-item-image .standards-badge img {
+    width: 18px !important;
+    height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
+    margin: 0 !important;
+    object-fit: contain !important;
+  }
+
+  /* Ensure the image container keeps its positioning context in print */
+  #poster-a4 .poster-item-image {
+    position: relative !important;
+  }
 }
 
 /* =========================================================
