@@ -595,6 +595,11 @@
       if (posterBadge) {
         posterBadge.classList.add('standards-badge--meta');
         meta.appendChild(posterBadge);
+      } else {
+        const spacer = document.createElement('div');
+        spacer.className = 'standards-badge--spacer';
+        spacer.setAttribute('aria-hidden', 'true');
+        meta.appendChild(spacer);
       }
       const rawPrice = posterPrices.get(code) || '';
       const priceVal = String(rawPrice || '').trim();
