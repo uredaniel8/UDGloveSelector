@@ -1172,6 +1172,18 @@ body {
   margin-top: 2px;
 }
 
+/* Invisible spacer that reserves the same footprint as the real badge in poster tiles */
+.poster-item-meta .standards-badge--spacer {
+  display: block;
+  /* height: border (2px) + padding (6px) + img (28px) + gap (2px) + text (~11px) = 49px */
+  height: 49px;
+  width: 38px;
+  visibility: hidden;
+  pointer-events: none;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
 /* Price overlay inside poster tile image — bottom-right corner */
 .poster-price-overlay {
   position: absolute;
