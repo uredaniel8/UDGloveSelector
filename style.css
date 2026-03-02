@@ -2122,6 +2122,11 @@ body {
     max-width: 14px !important;
     max-height: 14px !important;
   }
+  /* Shrink the invisible spacer to match the reduced badge height so that
+     cards without a standards symbol don't render a taller meta panel */
+  #poster-a4 .poster-item-meta .standards-badge--spacer {
+    height: 31px !important; /* border(2) + padding(2) + img(14) + gap(2) + text(~11) = 31px */
+  }
 
   /* Footer boxes — keep tidy at A3 */
   #poster-a4 .poster-footer { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 6mm !important; }
@@ -2504,6 +2509,11 @@ body.poster-export-mode #poster-a4 .poster-item-meta .standards-badge img {
   height: 14px !important;
   max-width: 14px !important;
   max-height: 14px !important;
+}
+/* Shrink the invisible spacer to match the reduced badge height so that
+   cards without a standards symbol don't render a taller meta panel in export mode */
+body.poster-export-mode #poster-a4 .poster-item-meta .standards-badge--spacer {
+  height: 31px !important; /* border(2) + padding(2) + img(14) + gap(2) + text(~11) = 31px */
 }
 
 
