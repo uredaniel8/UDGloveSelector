@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
     f_datasheet: get('f_datasheet'),
     f_standardsIcon: get('f_standardsIcon'),
     f_standardsCode: get('f_standardsCode'),
+    f_standardsLabel: get('f_standardsLabel'),
     filtersContainer: get('filtersContainer'),
 
     catManagerList: get('catManagerList'),
@@ -312,6 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if(els.f_datasheet) els.f_datasheet.value = p.datasheet || "";
     if(els.f_standardsIcon) els.f_standardsIcon.value = p.standardsIcon || "";
     if(els.f_standardsCode) els.f_standardsCode.value = p.standardsCode || "";
+    if(els.f_standardsLabel) els.f_standardsLabel.value = p.standardsLabel || "";
     
     updateBrandSelect(p.brand);
     renderFilterChecks(norm);
@@ -403,6 +405,7 @@ document.addEventListener('DOMContentLoaded', function () {
     p.datasheet = els.f_datasheet.value.trim();
     p.standardsIcon = els.f_standardsIcon ? els.f_standardsIcon.value.trim() : (p.standardsIcon || "");
     p.standardsCode = els.f_standardsCode ? els.f_standardsCode.value.trim() : (p.standardsCode || "");
+    p.standardsLabel = els.f_standardsLabel ? els.f_standardsLabel.value.trim() : (p.standardsLabel || "");
 
     const checks = els.filtersContainer.querySelectorAll('input[type="checkbox"]');
     const newMapEntry = {};
@@ -434,6 +437,7 @@ document.addEventListener('DOMContentLoaded', function () {
     els.f_datasheet.value = "";
     if(els.f_standardsIcon) els.f_standardsIcon.value = "";
     if(els.f_standardsCode) els.f_standardsCode.value = "";
+    if(els.f_standardsLabel) els.f_standardsLabel.value = "";
     updateBrandSelect("");
     renderFilterChecks("NEW_TEMP_KEY"); 
     
@@ -605,6 +609,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (p.datasheet) strictObj.datasheet = p.datasheet;
         if (p.standardsIcon) strictObj.standardsIcon = p.standardsIcon;
         if (p.standardsCode) strictObj.standardsCode = p.standardsCode;
+        if (p.standardsLabel) strictObj.standardsLabel = p.standardsLabel;
 
         // B. Primary Specs (Standard Categories)
         const gauge = getVal('Gauge');
@@ -737,7 +742,8 @@ ${JSON.stringify(cleanFilters, null, 2)};
             "Image Path": p.image,
             "Datasheet Path": p.datasheet,
             "Standards Icon": p.standardsIcon || "",
-            "Standards Code": p.standardsCode || ""
+            "Standards Code": p.standardsCode || "",
+            "Standards Label": p.standardsLabel || ""
         };
 
         // Add attributes dynamically based on all available categories

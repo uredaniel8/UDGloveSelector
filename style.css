@@ -1148,6 +1148,15 @@ body {
   white-space: nowrap;
 }
 
+.standards-badge-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #003a70;
+  text-align: center;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
 /* Smaller badge inside poster tiles — bottom-left to avoid overlap with price */
 .poster-item-image .standards-badge {
   bottom: 4px;
@@ -1172,11 +1181,17 @@ body {
   margin-top: 2px;
 }
 
+/* Slightly smaller icon for badges inside the poster meta panel */
+.poster-item-meta .standards-badge img {
+  width: 22px;
+  height: 22px;
+}
+
 /* Invisible spacer that reserves the same footprint as the real badge in poster tiles */
 .poster-item-meta .standards-badge--spacer {
   display: block;
-  /* height: border (2px) + padding (6px) + img (28px) + gap (2px) + text (~11px) = 49px */
-  height: 49px;
+  /* height: border (2px) + padding (6px) + img (22px) + gap (2px) + text (~11px) = 43px */
+  height: 43px;
   width: 38px;
   visibility: hidden;
   pointer-events: none;
