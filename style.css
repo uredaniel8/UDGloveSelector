@@ -1026,6 +1026,7 @@ body {
   flex-direction: column;
   gap: 3px;
   box-sizing: border-box;
+  min-height: 52px;
 }
 
 .poster-meta-row {
@@ -1147,10 +1148,11 @@ body {
   white-space: nowrap;
 }
 
-/* Smaller badge inside poster tiles */
+/* Smaller badge inside poster tiles — bottom-left to avoid overlap with price */
 .poster-item-image .standards-badge {
   bottom: 4px;
-  right: 4px;
+  left: 4px;
+  right: auto;
   padding: 2px 3px;
 }
 
@@ -1168,6 +1170,23 @@ body {
   position: static;
   align-self: flex-start;
   margin-top: 2px;
+}
+
+/* Price overlay inside poster tile image — bottom-right corner */
+.poster-price-overlay {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-weight: 800;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
 }
 
 /* =========================================================
@@ -1668,7 +1687,7 @@ body {
   #poster-a4 .poster-item-meta { font-size: 10pt !important; line-height: 1.25 !important; }
   #poster-a4 .poster-meta-key { font-size: 10pt !important; }
   #poster-a4 .poster-meta-val { font-size: 10pt !important; }
-  #poster-a4 .poster-price-inline { font-size: 10pt !important; }
+  #poster-a4 .poster-price-overlay { font-size: 10pt !important; }
 
   /* Remove the unwanted gap between Coating and Cut */
   #poster-a4 .poster-meta-row { margin: 0 !important; }
@@ -1873,7 +1892,7 @@ body {
   #tab-poster .poster-item{
     padding-bottom: 6mm !important;
   }
-  #tab-poster .poster-price-inline{
+  #tab-poster .poster-price-overlay{
     font-size: 8.2px !important;
     padding: 1.2px 5px !important;
   }
@@ -1885,7 +1904,7 @@ body {
   #tab-poster .poster-meta-row--cut{
     flex-wrap: nowrap !important;
   }
-  #tab-poster .poster-price-inline{
+  #tab-poster .poster-price-overlay{
     white-space: nowrap !important;
   }
 }
@@ -1929,7 +1948,7 @@ body {
   /* Keep text readable */
   .poster-item-caption{ font-size: 9pt !important; }
   .poster-item-meta, .poster-item-sizes{ font-size: 7.5pt !important; }
-  .poster-price-inline{ font-size: 8pt !important; }
+  .poster-price-overlay{ font-size: 8pt !important; }
 }
 
 
@@ -2034,18 +2053,18 @@ body {
     line-height: 1.22 !important;
     color: #213244 !important;
     margin-top: 0 !important;
+    min-height: 38px !important;
   }
-  #poster-a4 .poster-meta-row { display: grid !important; grid-template-columns: 18mm 1fr auto !important; column-gap: 2mm !important; align-items: baseline !important; }
+  #poster-a4 .poster-meta-row { display: grid !important; grid-template-columns: 18mm 1fr !important; column-gap: 2mm !important; align-items: baseline !important; }
   #poster-a4 .poster-meta-key { font-weight: 800 !important; color: #0b1f33 !important; }
   #poster-a4 .poster-meta-val { font-weight: 500 !important; }
-  #poster-a4 .poster-price-inline {
-    justify-self: end !important;
+  #poster-a4 .poster-price-overlay {
     font-weight: 800 !important;
     font-size: 9pt !important;
     padding: 1mm 2.5mm !important;
     border-radius: 3mm !important;
     border: 1px solid #d8e2ef !important;
-    background: #f3f7fb !important;
+    background: rgba(255, 255, 255, 0.92) !important;
     color: #0b1f33 !important;
     white-space: nowrap !important;
   }
@@ -2110,7 +2129,7 @@ body {
   }
 
   /* Bigger meta text */
-  #poster-a4 .poster-item-meta { font-size: 10pt !important; line-height: 1.18 !important; }
+  #poster-a4 .poster-item-meta { font-size: 10pt !important; line-height: 1.18 !important; min-height: 42px !important; }
   #poster-a4 .poster-meta-key,
   #poster-a4 .poster-meta-val { font-size: 10pt !important; }
   #poster-a4 .poster-meta-key { font-weight: 800 !important; }
@@ -2189,9 +2208,9 @@ body {
     font-weight: 700;
   }
 
-  /* Price bubble */
-  #poster-a4 .poster-price-inline{
-    background: #d7ebff;
+  /* Price overlay */
+  #poster-a4 .poster-price-overlay{
+    background: rgba(255, 255, 255, 0.92);
     border: 1px solid #b8d7ff;
     border-radius: 999px;
     padding: 2px 8px;
