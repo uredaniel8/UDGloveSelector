@@ -1189,6 +1189,19 @@ body {
   white-space: nowrap;
 }
 
+/* Price bar: sits at bottom of the white image area, above meta panel */
+.poster-item-price-bar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2px 8px 4px;
+}
+/* When price overlay is in the price bar, it's in normal flow (not absolute) */
+.poster-item-price-bar .poster-price-overlay {
+  position: static;
+}
+
 /* =========================================================
    MODALS
    ========================================================= */
@@ -2068,6 +2081,20 @@ body {
     color: #0b1f33 !important;
     white-space: nowrap !important;
   }
+  #poster-a4 .poster-item-price-bar {
+    display: flex !important;
+    justify-content: flex-end !important;
+    padding: 1mm 2mm !important;
+  }
+  #poster-a4 .poster-item-meta .standards-badge {
+    padding: 1px 2px !important;
+  }
+  #poster-a4 .poster-item-meta .standards-badge img {
+    width: 14px !important;
+    height: 14px !important;
+    max-width: 14px !important;
+    max-height: 14px !important;
+  }
 
   /* Footer boxes — keep tidy at A3 */
   #poster-a4 .poster-footer { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 6mm !important; }
@@ -2431,6 +2458,25 @@ body.poster-export-mode #poster-a4 .poster-item-meta{
   padding: 8px 10px !important; /* matches base .poster-item-meta padding */
   margin: 0 !important;
   box-sizing: border-box !important;
+}
+
+/* Price bar in export mode */
+body.poster-export-mode #poster-a4 .poster-item-price-bar {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  padding: 2px 8px 4px !important;
+}
+
+/* Standards badge in meta panel (export mode) */
+body.poster-export-mode #poster-a4 .poster-item-meta .standards-badge {
+  padding: 1px 2px !important;
+}
+body.poster-export-mode #poster-a4 .poster-item-meta .standards-badge img {
+  width: 14px !important;
+  height: 14px !important;
+  max-width: 14px !important;
+  max-height: 14px !important;
 }
 
 
