@@ -593,21 +593,16 @@
       addMetaRow(meta, glove.coating ? 'Coating' : (glove.leather ? 'Leather' : 'Coating'), glove.coating || glove.leather);
       const posterBadge = createStandardsBadge(glove);
       if (posterBadge) {
-        posterBadge.classList.add('standards-badge--meta');
-        meta.appendChild(posterBadge);
+        imgWrap.appendChild(posterBadge);
       }
       const rawPrice = posterPrices.get(code) || '';
       const priceVal = String(rawPrice || '').trim();
       if (priceVal) {
-        const row = document.createElement('div');
-        row.className = 'poster-meta-row poster-meta-row--cut';
-        const p = document.createElement('span');
-        p.className = 'poster-price-inline';
-        p.textContent = priceVal.startsWith('£') ? priceVal : `£${priceVal}`;
-        row.appendChild(p);
-        meta.appendChild(row);
+        const priceOverlay = document.createElement('span');
+        priceOverlay.className = 'poster-price-overlay';
+        priceOverlay.textContent = priceVal.startsWith('£') ? priceVal : `£${priceVal}`;
+        imgWrap.appendChild(priceOverlay);
       }
-      if (!meta.children.length) meta.style.display = 'none';
 
       item.appendChild(cap);
       item.appendChild(imgWrap);
