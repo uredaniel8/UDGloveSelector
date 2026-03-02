@@ -198,12 +198,21 @@
 
   const POSTER_MAX = 10;
 
-  function createStandardsBadge(glove) {
+  function createStandardsBadge(glove, forPoster) {
     const stdIcon = (glove.standardsIcon || '').trim();
     const stdCode = (glove.standardsCode || '').trim();
     if (!stdIcon || !stdCode) return null;
     const badge = document.createElement('div');
     badge.className = 'standards-badge';
+    if (forPoster) {
+      const stdLabel = (glove.standardsLabel || '').trim();
+      if (stdLabel) {
+        const labelEl = document.createElement('span');
+        labelEl.className = 'standards-badge-label';
+        labelEl.textContent = stdLabel;
+        badge.appendChild(labelEl);
+      }
+    }
     const badgeImg = document.createElement('img');
     badgeImg.src = stdIcon;
     badgeImg.alt = stdCode;
@@ -591,7 +600,7 @@
       const sizesStr = Array.isArray(glove.sizes) ? glove.sizes.join(', ') : (glove.sizes || '');
       addMetaRow(meta, 'Sizes', sizesStr);
       addMetaRow(meta, glove.coating ? 'Coating' : (glove.leather ? 'Leather' : 'Coating'), glove.coating || glove.leather);
-      const posterBadge = createStandardsBadge(glove);
+      const posterBadge = createStandardsBadge(glove, true);
       if (posterBadge) {
         posterBadge.classList.add('standards-badge--meta');
         meta.appendChild(posterBadge);
