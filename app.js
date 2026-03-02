@@ -593,19 +593,23 @@
       addMetaRow(meta, glove.coating ? 'Coating' : (glove.leather ? 'Leather' : 'Coating'), glove.coating || glove.leather);
       const posterBadge = createStandardsBadge(glove);
       if (posterBadge) {
-        imgWrap.appendChild(posterBadge);
+        posterBadge.classList.add('standards-badge--meta');
+        meta.appendChild(posterBadge);
       }
       const rawPrice = posterPrices.get(code) || '';
       const priceVal = String(rawPrice || '').trim();
-      if (priceVal) {
-        const priceOverlay = document.createElement('span');
-        priceOverlay.className = 'poster-price-overlay';
-        priceOverlay.textContent = priceVal.startsWith('£') ? priceVal : `£${priceVal}`;
-        imgWrap.appendChild(priceOverlay);
-      }
 
       item.appendChild(cap);
       item.appendChild(imgWrap);
+      if (priceVal) {
+        const priceBar = document.createElement('div');
+        priceBar.className = 'poster-item-price-bar';
+        const priceOverlay = document.createElement('span');
+        priceOverlay.className = 'poster-price-overlay';
+        priceOverlay.textContent = priceVal.startsWith('£') ? priceVal : `£${priceVal}`;
+        priceBar.appendChild(priceOverlay);
+        item.appendChild(priceBar);
+      }
       item.appendChild(meta);
       els.posterGrid.appendChild(item);
     });
